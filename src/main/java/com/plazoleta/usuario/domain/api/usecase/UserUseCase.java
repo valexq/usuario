@@ -1,5 +1,6 @@
 package com.plazoleta.usuario.domain.api.usecase;
 import com.plazoleta.usuario.domain.api.IUserServicePort;
+import com.plazoleta.usuario.domain.exception.EmailAlreadyExistsException;
 import com.plazoleta.usuario.domain.exception.UserNullException;
 import com.plazoleta.usuario.domain.model.User;
 import com.plazoleta.usuario.domain.spi.IUserPersistencePort;
@@ -23,7 +24,9 @@ public class UserUseCase implements IUserServicePort{
         }
         if (!isUserValid(user)){
             throw new UserNullException("El usuario no es válido");
-
+        }
+        if (userPersistencePort.existsUserByEmail(user.getEmail()).isPresent()){
+            throw new EmailAlreadyExistsException("El usuario ya existe");
         }
     }
     private boolean isUserValid(User user){
