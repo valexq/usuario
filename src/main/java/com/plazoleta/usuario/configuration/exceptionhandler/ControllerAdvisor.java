@@ -1,6 +1,7 @@
 package com.plazoleta.usuario.configuration.exceptionhandler;
 
 import com.plazoleta.usuario.domain.exception.EmailAlreadyExistsException;
+import com.plazoleta.usuario.domain.exception.RoleNoDataFoundException;
 import com.plazoleta.usuario.domain.exception.UserNullException;
 import lombok.RequiredArgsConstructor;
 
@@ -29,5 +30,9 @@ public class ControllerAdvisor {
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity<ExceptionCodeResponse> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex){
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ExceptionCodeResponse(HttpStatus.CONFLICT.value(), ex.getMessage(), HttpStatus.CONFLICT.name(), LocalDateTime.now()));
+    }
+    @ExceptionHandler(RoleNoDataFoundException.class)
+    public ResponseEntity<ExceptionCodeResponse> RoleNoDataFoundException(RoleNoDataFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionCodeResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage(), HttpStatus.NOT_FOUND.name(), LocalDateTime.now()));
     }
 }

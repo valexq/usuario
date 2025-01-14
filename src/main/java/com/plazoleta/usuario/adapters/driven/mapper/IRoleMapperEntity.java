@@ -9,7 +9,7 @@ import org.mapstruct.Mapper;
 
 
 public interface IRoleMapperEntity {
-    Role RoleEntityToRole(RoleEntity roleEntity);
+    Role roleEntityToRole(RoleEntity roleEntity);
 }
 
 
