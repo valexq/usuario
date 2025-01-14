@@ -17,6 +17,7 @@ public class BeanConfiguration {
     private final IUserMapperEntity userMapperEntity;
     private final IUserRepository userRepository;
 
+    @Bean
     public IUserServicePort userServicePort(IUserPersistencePort userPersistencePort){
         //Como el IUserServicePort es implementado por el UserCase (final) se debe retornar un UserUseCase
         return new UserUseCase(userPersistencePort);

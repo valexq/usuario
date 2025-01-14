@@ -10,11 +10,17 @@ import lombok.RequiredArgsConstructor;
 public class UserUseCase implements IUserServicePort{
     private final IUserPersistencePort userPersistencePort;
     @Override
-    public User saveUser(User user) {
+    public User saveUserAdmin(User user) {
         validateUser(user);
-        userPersistencePort.saveUser(user);
-        return null;
+        User userSaved = userPersistencePort.saveUser(user);
+        return userSaved;
     }
+    public User saveUserOwner(User user) {
+        validateUser(user);
+        User userSaved = userPersistencePort.saveUser(user);
+        return userSaved;
+    }
+
     private void validateUser(User user){
         if (user == null){
             throw new UserNullException("El usuario no puede ser nulo"); //Usamos la excepcion creada
